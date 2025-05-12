@@ -3,7 +3,7 @@ import type { ProductInterface } from "../interface/product";
 import { getLocalCategories } from "../helper/category";
 import { getLocalProducts } from "../helper/product";
 import {
-    CategoryAction,
+    type CategoryAction,
     categoryReducer,
     ProductAction,
     productReducer,

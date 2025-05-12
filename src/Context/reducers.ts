@@ -10,13 +10,15 @@ export interface ActionType<T> {
 }
 
 // Products
-export enum ProductAction {
-    deleteProduct = "products/deleteProduct",
-    getProducts = "products/getProducts",
-    addProducts = "products/addProducts",
-    editProduct = "products/editProduct",
-    sortProducts = "sort/sortProducts",
-}
+export const ProductAction = {
+    deleteProduct: "products/deleteProduct",
+    getProducts: "products/getProducts",
+    addProducts: "products/addProducts",
+    editProduct: "products/editProduct",
+    sortProducts: "sort/sortProducts",
+} as const;
+export type ProductAction = typeof ProductAction[keyof typeof ProductAction];
+
 export const productReducer = (
     state: ProductInterface[],
     action: ActionType<ProductAction>
@@ -132,19 +134,21 @@ export const sortProducts = (payload: SortProductsInterface) => ({
 });
 
 // Categories
-export enum CategoryAction {
-    getCatogeries = "category/getCatogeries",
-    addCatogeries = "category/addCatogeries",
-}
+export const CategoryAction = {
+    getCategories: "category/getCategories",
+    addCategories: "category/addCategories",
+} as const;
+  
+export type CategoryAction = typeof CategoryAction[keyof typeof CategoryAction];
 export const categoryReducer = (
     state: CategoryInterface[],
     action: ActionType<CategoryAction>
 ) => {
     switch (action.type) {
-        case CategoryAction.getCatogeries:
+        case CategoryAction.getCategories:
             return state;
 
-        case CategoryAction.addCatogeries: {
+        case CategoryAction.addCategories: {
             const newCategories = [
                 ...state,
                 {
@@ -165,8 +169,8 @@ interface AddCategoryInterface {
     title: string;
     description: string;
 }
-export const getCatogeries = () => ({ type: CategoryAction.getCatogeries });
+export const getCatogeries = () => ({ type: CategoryAction.getCategories });
 export const addCatogery = (payload: AddCategoryInterface) => ({
-    type: CategoryAction.addCatogeries,
+    type: CategoryAction.addCategories,
     payload,
 });
